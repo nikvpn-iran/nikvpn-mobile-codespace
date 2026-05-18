@@ -1,0 +1,33 @@
+{
+  "name": "NikVPN Mobile Codespace",
+  "build": {
+    "dockerfile": "Dockerfile",
+    "context": "."
+  },
+  "features": {
+    "ghcr.io/devcontainers/features/common-utils:2": {
+      "installZsh": false
+    },
+    "ghcr.io/devcontainers/features/github-cli:1": {
+      "version": "latest"
+    }
+  },
+  "postAttachCommand": "gh codespace ports visibility 443:public 8443:public -c $CODESPACE_NAME && bash /usr/local/bin/start.sh && bash /usr/local/bin/menu.sh",
+  "portsAttributes": {
+    "443": {
+      "label": "nikvpn-xhttp",
+      "protocol": "http",
+      "onAutoForward": "silent"
+    },
+    "8443": {
+      "label": "nikvpn-xtls",
+      "protocol": "http",
+      "onAutoForward": "silent"
+    }
+  },
+  "forwardPorts": [443, 8443],
+  "hostRequirements": {
+    "cpus": 2,
+    "memory": "2gb"
+  }
+}

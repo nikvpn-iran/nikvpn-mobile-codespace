@@ -1,0 +1,33 @@
+# لاگ‌ها
+*.log
+/tmp/
+/logs/
+
+# فایل‌های موقت
+*.tmp
+*.temp
+
+# متغیرهای محیط
+.env
+.env.local
+.env.*.local
+
+# Cache
+.cache/
+__pycache__/
+*.pyc
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# سیستم
+.DS_Store
+Thumbs.db
+
+# فایل‌های حساس
+config-*.json
+*.pid
