@@ -1,8 +1,7 @@
 #!/bin/bash
-# اطمینان از Public بودن پورت‌ها
-echo "Setting ports to public..."
-gh codespace ports visibility 443:public -c $CODESPACE_NAME || true
-gh codespace ports visibility 8080:public -c $CODESPACE_NAME || true
+# Public کردن پورت‌ها
+gh codespace ports visibility 443:public -c $CODESPACE_NAME 2>/dev/null || true
+gh codespace ports visibility 8080:public -c $CODESPACE_NAME 2>/dev/null || true
 
 tmux kill-session -t nikvpn 2>/dev/null || true
 tmux new-session -d -s nikvpn
@@ -14,5 +13,6 @@ web-server.sh &
 
 tmux new-window -t nikvpn -n keepalive
 tmux send-keys -t nikvpn:keepalive "while true; do curl -s --max-time 5 https://github.com/ -o /dev/null; sleep 180; done" Enter
-echo "[NikVPN] Xray is running (tmux: nikvpn)"
-echo "[NikVPN] Web link: port 8080"
+echo "[NikVPN] Xray is running in background (tmux session: nikvpn)"
+echo "[NikVPN] View logs: tmux attach -t nikvpn"
+echo "[NikVPN] Web link available on port 8080 (check PORTS tab)"
